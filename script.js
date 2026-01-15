@@ -3,17 +3,34 @@ let btn = document.querySelector("#new-quote");
 let person = document.querySelector(".person");
 
 
-    const url = "https://api.quotable.io/random";
-    let getQuote = () => {
-        fetch(url)
-          .then((data) => data.json())
-          .then((item) => {
-            quote.innerText = item.content;
-            person.innerText = item.author;
-          });
-      };
-      document.addEventListener("load", getQuote);
-      btn.addEventListener("click", getQuote);
+
+const url = "https://v2.jokeapi.dev/joke/Any";
+
+const getJoke = () => {
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      if (data.type === "single") {
+        quote.innerText = data.joke;
+        person.innerText = "";
+      } else {
+        quote.innerText = data.setup;
+        person.innerText = data.delivery;
+      }
+    });
+};
+
+    // const url = "https://api.quotable.io/random";
+    // let getQuote = () => {
+    //     fetch(url)
+    //       .then((data) => data.json())
+    //       .then((item) => {
+    //         quote.innerText = item.content;
+    //         person.innerText = item.author;
+    //       });
+    //   };
+    //   document.addEventListener("load", getQuote);
+    //   btn.addEventListener("click", getQuote);
 
     
     //   const url = '';

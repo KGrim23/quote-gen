@@ -1,24 +1,31 @@
-let quote = document.querySelector(".quote");
-let btn = document.querySelector("#new-quote");
-let person = document.querySelector(".person");
+document.addEventListener("DOMContentLoaded", () => {
+  const quote = document.querySelector(".quote");
+  const btn = document.querySelector("#new-quote");
+  const person = document.querySelector(".person");
 
+  const url = "https://official-joke-api.appspot.com/random_joke";
 
+  const getJoke = () => {
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        quote.textContent = data.setup;
+        person.textContent = data.punchline;
+      })
+      .catch(err => {
+        quote.textContent = "Failed to load joke 😢";
+        person.textContent = "";
+        console.error(err);
+      });
+  };
 
-const url = "https://v2.jokeapi.dev/joke/Any";
+  // load first joke
+  getJoke();
 
-const getJoke = () => {
-  fetch(url)
-    .then(res => res.json())
-    .then(data => {
-      if (data.type === "single") {
-        quote.innerText = data.joke;
-        person.innerText = "";
-      } else {
-        quote.innerText = data.setup;
-        person.innerText = data.delivery;
-      }
-    });
-};
+  // button click
+  btn.addEventListener("click", getJoke);
+});
+
 
     // const url = "https://api.quotable.io/random";
     // let getQuote = () => {

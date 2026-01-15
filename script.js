@@ -3,7 +3,7 @@ let btn = document.querySelector("#new-quote");
 let person = document.querySelector(".person");
 
 
-    const url = "https://api.quotable.io";
+    const url = "https://api.quotable.io/random";
     let getQuote = () => {
         fetch(url)
           .then((data) => data.json())

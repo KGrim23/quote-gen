@@ -9,7 +9,7 @@ let person = document.querySelector(".person");
           .then((data) => data.json())
           .then((item) => {
             quote.innerText = item.content;
-            author.innerText = item.author;
+            person.innerText = item.author;
           });
       };
       document.addEventListener("load", getQuote);
